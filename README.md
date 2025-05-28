@@ -13,12 +13,14 @@
   	- Docker
     
 - Cómo instalar las dependencias:
-  	Las dependencias se instalan automáticamente en Docker
+  	`
+  	Docker build -t [nombre de la imagen] .
+   	`
   
 - Cómo iniciar la aplicacion (frontend y backend):
   	En la terminal, ejecutar:
   	`
-  	Docker run -d -p 8000:8000 --name [<nombreContenedor>] .
+  	Docker run -d -p 8000:8000 --name [<nombreContenedor>] [nombre de la imagen]
    	`
   
 - No es necesario configurar variables de entorno
