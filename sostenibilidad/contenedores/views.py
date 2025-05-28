@@ -29,7 +29,7 @@ def Escuelas(request):
 
 def Visualizacion_datos(request, escuelaid):
 
-    doc = loader.get_template('visualizacion_datos.html')
+    doc = loader.get_template('listado-contenedores.html')
 
     centro = Centro.objects.get(id=escuelaid)
 
@@ -46,12 +46,19 @@ def Visualizacion_datos(request, escuelaid):
 
 def Visualizacion_datos_contenedor(request, contenedorid):
 
-    doc = loader.get_template('visualizacion_datos_contenedor.html')
+    doc = loader.get_template('grafico-contenedor.html')
 
     contenedor = Contenedor.objects.get(id=contenedorid)
 
+    if contenedor.historico_capacidades:
+        ultimo_nivel = contenedor.historico_capacidades[-1]['nivel']
+        critico = ultimo_nivel > (contenedor.capacidad * 0.75)
+    else:
+        critico = False
+
     ctx = {
         'contenedor': contenedor,
+        'critico': critico,
     }
 
     doc_template = doc.render(ctx)

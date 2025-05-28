@@ -16,7 +16,13 @@
     <h2>Lista de Escuelas</h2>
     <div class="school-list">
       <!-- Cada "card" representa una escuela, estos elementos se generarán de forma dinámica en producción -->
+       {% if critico%}
+        <h1>CRITICO</h1>
+       {% endif %}
        {% for centro in centros %}
+       dir:
+       {{contenedor.latitud}}
+       {{contenedor.longitud}}
       <div class="school-card">
         <h2><a href="/contenedores/lista/{{centro.id}}/">{{centro.centro}}</a></h2>
       </div>
