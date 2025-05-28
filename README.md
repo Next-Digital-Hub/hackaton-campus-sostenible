@@ -8,14 +8,21 @@
 
 > Puedes organizar el proyecto como prefieras, siempre que cumplas los requisitos funcionales
 
-## 📌 Importante: Modifica este README
-Este archivo README debe ser modificado para incluir instrucciones claras sobre cómo ejecutar tu proyecto. Asegúrate de documentar lo siguiente:
-
-- Requisitos previos (versiones de Node.js, Python, Java, etc.)
-- Cómo instalar las dependencias
-- Cómo iniciar la aplicacion (frontend y/o backend)
-- Cómo configurar variables de entorno (si es necesario)
-- Cualquier otra información relevante para ejecutar y probar tu aplicación (p.ej. si utilizas docker)
+## 📌 Importante:
+- Requisitos previos (versiones de Node.js, Python, Java, etc.):
+  	- Docker
+    
+- Cómo instalar las dependencias:
+  	Las dependencias se instalan automáticamente en Docker
+  
+- Cómo iniciar la aplicacion (frontend y backend):
+  	En la terminal:
+  	```Docker run -d -p 8000:8000 --name [<nombreContenedor>] .```
+  
+- No es necesario configurar variables de entorn
+  - 
+- Cualquier otra información relevante para ejecutar y probar tu aplicación (p.ej. si utilizas docker):
+	La aplicación está hecha con Docker, usando Django, SQLite y Cron.
 
 ## 📦 Material complementario
 ### 1. API rest de consulta del nivel de llenado de los contenedores
