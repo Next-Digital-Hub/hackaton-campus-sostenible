@@ -28,3 +28,4 @@ urlpatterns = [
     path("contenedores/lista/<int:centro_id>/", contenedores.Visualizacion_datos, name="obtener_niveles_por_centro"),
     path("contenedores/visualizar/<int:contenedor_id>/", contenedores.Visualizacion_datos_contenedor, name="obtener_nivel_contenedor"),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
