@@ -1,0 +1,1 @@
+*/5 * * * * /usr/local/bin/python /ruta/a/tu/proyecto/manage.py obtener_niveles >> /var/log/cron.log 2>&1
