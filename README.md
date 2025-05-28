@@ -15,12 +15,15 @@
 - Cómo instalar las dependencias:
   	```
   	pip3 install django cron
-  
-  	echo "*/5 * * * * /usr/local/bin/python /ruta/a/tu/proyecto/manage.py obtener_niveles >> /var/log/cron.log 2>&1" > cronjobs
+
+  	crontab -e
+	```
+   	Cargar el cron
+  	```
+   	*/5 * * * * cd [ruta al proyecto]/hackaton-campus-sostenible/sostenibilidad && /usr/bin/python3 manage.py cargar_datos >> /home/[usuario]/cargar_datos.log 2>&1
 
 	sudo service cron start
-   
-	crontab cronjobs
+
    	```
   
 - Cómo iniciar la aplicacion (frontend y backend):
