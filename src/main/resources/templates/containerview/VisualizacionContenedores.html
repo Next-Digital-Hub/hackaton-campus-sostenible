@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid de Contenedores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .container-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #3b82f6;
+            transition: width 0.4s ease;
+        }
+
+        .progress-fill.high {
+            background-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Contenedores</h1>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="text-gray-500 text-sm">Total Contenedores</div>
+            <div id="total-containers" class="text-2xl font-bold">0</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="text-gray-500 text-sm">Llenado Promedio</div>
+            <div id="avg-fill" class="text-2xl font-bold">0%</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="text-gray-500 text-sm">Críticos (&gt;75%)</div>
+            <div id="critical-containers" class="text-2xl font-bold text-red-600">0</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+            <div class="text-gray-500 text-sm">Disponibles (&lt;25%)</div>
+            <div id="available-containers" class="text-2xl font-bold text-green-600">0</div>
+        </div>
+    </div>
+
+    <!-- Container Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div th:each="container : ${containers}"
+             class="bg-white rounded-lg shadow-sm overflow-hidden container-card"
+             th:attr="data-percentage=${container.percentage}">
+            <div class="p-5">
+                <div class="flex justify-between items-start mb-3">
+                    <span th:text="${container.code}" class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-semibold">RES-001</span>
+                    <span th:text="${container.zone}" class="text-xs text-gray-500">Campus Norte</span>
+                </div>
+                <p th:text="${container.center}" class="text-sm text-gray-600 mb-1">
+                    <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                </p>
+                <p th:text="${container.type}" class="text-sm text-gray-600 mb-4">
+                    <i class="fas fa-tag mr-2 text-gray-400"></i>
+                </p>
+
+                <div class="mb-2">
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-medium">Llenado</span>
+                        <span th:text="${container.percentage + '%'}"
+                              th:classappend="${container.percentage > 75} ? ' text-red-600' : ' text-gray-800'"
+                              class="font-bold">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div th:style="'width:' + ${container.percentage} + '%'"
+                             th:class="'progress-fill' + (${container.percentage > 75} ? ' high' : '')"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3 flex justify-end">
+                <button class="text-blue-600 hover:text-blue-800 mr-4"><i class="fas fa-edit"></i></button>
+                <button class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para estadísticas -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const containerCards = document.querySelectorAll(".container-card");
+
+        let total = 0;
+        let totalPercentage = 0;
+        let criticalCount = 0;
+        let availableCount = 0;
+
+        containerCards.forEach(card => {
+            const percentage = parseInt(card.getAttribute("data-percentage"), 10);
+            if (!isNaN(percentage)) {
+                total++;
+                totalPercentage += percentage;
+
+                if (percentage > 75) {
+                    criticalCount++;
+                } else if (percentage < 25) {
+                    availableCount++;
+                }
+            }
+        });
+
+        const average = total > 0 ? Math.round(totalPercentage / total) : 0;
+
+        document.getElementById("total-containers").textContent = total;
+        document.getElementById("avg-fill").textContent = average + "%";
+        document.getElementById("critical-containers").textContent = criticalCount;
+        document.getElementById("available-containers").textContent = availableCount;
+    });
+</script>
+</body>
+</html>
