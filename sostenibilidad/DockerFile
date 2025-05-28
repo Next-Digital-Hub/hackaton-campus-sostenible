@@ -1,0 +1,27 @@
+FROM python:3.12-slim
+
+# Instalación de sistema y cron
+RUN apt-get update && apt-get install -y cron gcc libpq-dev && apt-get clean
+
+# Crear directorio de la app
+WORKDIR /app
+
+# Copiar TODO el código
+COPY . /app
+
+# Instalar dependencias sin requirements.txt
+RUN pip install Django psycopg2 requests
+
+# Prepara el cron
+COPY crontab.txt /etc/cron.d/obtener_niveles
+RUN chmod 0644 /etc/cron.d/obtener_niveles && \
+    crontab /etc/cron.d/obtener_niveles && \
+    touch /var/log/cron.log
+
+# Exponer puerto del servidor Django
+EXPOSE 8000
+
+# Comando final: migraciones, arranque de cron y Django
+CMD python manage.py migrate && \
+    cron && \
+    python manage.py runserver 0.0.0.0:8000

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Gestión Recursos UPM</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Sistema Gestión Recursos UPM</h1>
+  </header>
+
+  <div class="container">
+    <h2>Lista de Escuelas</h2>
+    <div class="school-list">
+      <!-- Cada "card" representa una escuela, estos elementos se generarán de forma dinámica en producción -->
+       {% if critico%}
+        <h1>CRITICO</h1>
+       {% endif %}
+       {% for centro in centros %}
+       dir:
+       {{contenedor.latitud}}
+       {{contenedor.longitud}}
+      <div class="school-card">
+        <h2><a href="/contenedores/lista/{{centro.id}}/">{{centro.centro}}</a></h2>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>
+    <p>UPM - Sistema Gestión Recursos. © 2025</p>
+  </footer>
+
+</body>
+</html>

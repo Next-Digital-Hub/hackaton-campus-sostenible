@@ -8,14 +8,35 @@
 
 > Puedes organizar el proyecto como prefieras, siempre que cumplas los requisitos funcionales
 
-## 📌 Importante: Modifica este README
-Este archivo README debe ser modificado para incluir instrucciones claras sobre cómo ejecutar tu proyecto. Asegúrate de documentar lo siguiente:
+## 📌 Importante:
+- Requisitos previos (versiones de Node.js, Python, Java, etc.):
+  	- Docker
+    
+- Cómo instalar las dependencias:
+  	```
+  	pip3 install django cron
 
-- Requisitos previos (versiones de Node.js, Python, Java, etc.)
-- Cómo instalar las dependencias
-- Cómo iniciar la aplicacion (frontend y/o backend)
-- Cómo configurar variables de entorno (si es necesario)
-- Cualquier otra información relevante para ejecutar y probar tu aplicación (p.ej. si utilizas docker)
+  	crontab -e
+	```
+   	Cargar el cron
+  	```
+   	*/5 * * * * cd [ruta al proyecto]/hackaton-campus-sostenible/sostenibilidad && /usr/bin/python3 manage.py cargar_datos >> /home/[usuario]/cargar_datos.log 2>&1
+
+	sudo service cron start
+
+   	```
+  
+- Cómo iniciar la aplicacion (frontend y backend):
+  	En la terminal, ejecutar:
+  
+  	```
+  	cron && python manage.py runserver 0.0.0.0:8000
+   	```
+  
+- No es necesario configurar variables de entorno
+  
+- Información relevante para ejecutar y probar tu aplicación:
+	La aplicación está hecha con Docker, usando Django, SQLite y Cron.
 
 ## 📦 Material complementario
 ### 1. API rest de consulta del nivel de llenado de los contenedores
