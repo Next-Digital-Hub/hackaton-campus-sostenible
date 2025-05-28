@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,3 +25,4 @@ urlpatterns = [
     path("contenedores/lista/<int:centro_id>/", "contenedores.views.obtener_niveles", name="obtener_niveles_por_centro"),
     path("contenedores/visualizar/<int:contenedor_id>/", "contenedores.views.obtener_nivel_contenedor", name="obtener_nivel_contenedor"),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

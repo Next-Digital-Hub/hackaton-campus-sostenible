@@ -65,7 +65,7 @@ def Escuelas(request):
     Vista para mostrar la página de selección de escuela.
     """
 
-    doc = loader.get_template('escuelas.html')
+    doc = loader.get_template('servicio-gestion-residuos-UPM.html')
 
     centros = Centro.objects.all()
 
@@ -81,10 +81,13 @@ def Visualizacion_datos(request, escuelaid):
 
     doc = loader.get_template('visualizacion_datos.html')
 
-    contenedores = Contenedor.objects.filter(Centro=Centro.objects.get(id=escuelaid))
+    centro = Centro.objects.get(id=escuelaid)
+
+    contenedores = Contenedor.objects.filter(Centro=centro)
 
     ctx = {
         'contenedores': contenedores,
+        'centros': centro, 
     }
 
     doc_template = doc.render(ctx)
