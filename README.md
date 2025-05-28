@@ -16,8 +16,6 @@
   	```
   	pip3 install django cron
   
-  	RUN echo "*/5 * * * * cd /app && python manage.py obtener_niveles >> /var/log/cron.log 2>&1" > /etc/cron.d/obtener-niveles
-  
   	echo "*/5 * * * * /usr/local/bin/python /ruta/a/tu/proyecto/manage.py obtener_niveles >> /var/log/cron.log 2>&1" > cronjobs
   
 	crontab cronjobs
