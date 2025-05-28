@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Gestión Recursos UPM</title>
+  <title>Listado de contenedores</title>
   <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
 
   <header>
-    <h1>Sistema Gestión Recursos UPM</h1>
+    <h1>Listado de contenedores de {{centros.centro}}</h1>
   </header>
 
   <div class="container">
-    <h2>Lista de Escuelas</h2>
-    <div class="school-list">
+    <h2>Lista de contenedores</h2>
+    <div class="container-list">
       <!-- Cada "card" representa una escuela, estos elementos se generarán de forma dinámica en producción -->
-       {% for centro in centros %}
-      <div class="school-card">
-        <h2><a href="/contenedores/lista/{{centro.id}}/">{{centro.centro}}</a></h2>
+       {% for contenedor in contenedores %}
+      <div class="container-card">
+        <h2><a href="/contenedores/visualizar/{{contenedor.id}}/">{{contenedor.nombre}}</a></h2>
       </div>
       {% endfor %}
     </div>

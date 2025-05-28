@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfico desde JSON</title>
+  <!-- Cargamos Chart.js desde un CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .chart-container {
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gráfico Generado a partir de JSON</h1>
+  <div class="chart-container">
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="js/grafico-contenedor.js">
+    // JSON de ejemplo. Puedes reemplazarlo por datos obtenidos vía fetch() si lo necesitas.
+    
+    const charData = JSON.parse('{{ contenedor.historico_instalacion|escapejs }}')
+
+    // Configuración y opciones del gráfico (aquí se crea un gráfico tipo "bar")
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // Creación del gráfico en el canvas con id "myChart"
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+
+</body>
+</html>
