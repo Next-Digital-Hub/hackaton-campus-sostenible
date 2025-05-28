@@ -17,11 +17,13 @@
   
 - Cómo iniciar la aplicacion (frontend y backend):
   	En la terminal:
-  	```Docker run -d -p 8000:8000 --name [<nombreContenedor>] .```
+  	`
+  	Docker run -d -p 8000:8000 --name [<nombreContenedor>] .
+   	`
   
-- No es necesario configurar variables de entorn
-  - 
-- Cualquier otra información relevante para ejecutar y probar tu aplicación (p.ej. si utilizas docker):
+- No es necesario configurar variables de entorno
+  
+- Información relevante para ejecutar y probar tu aplicación:
 	La aplicación está hecha con Docker, usando Django, SQLite y Cron.
 
 ## 📦 Material complementario
