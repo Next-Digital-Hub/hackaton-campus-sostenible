@@ -14,13 +14,16 @@
     
 - Cómo instalar las dependencias:
   	`
-  	Docker build -t [nombre de la imagen] .
+  	pip3 install django cron
+  	RUN echo "*/5 * * * * cd /app && python manage.py obtener_niveles >> /var/log/cron.log 2>&1" > /etc/cron.d/obtener-niveles
+  	echo "*/5 * * * * /usr/local/bin/python /ruta/a/tu/proyecto/manage.py obtener_niveles >> /var/log/cron.log 2>&1" > cronjobs
+	crontab cronjobs
    	`
   
 - Cómo iniciar la aplicacion (frontend y backend):
   	En la terminal, ejecutar:
   	`
-  	Docker run -d -p 8000:8000 --name [<nombreContenedor>] [nombre de la imagen]
+  	cron && python manage.py runserver 0.0.0.0:8000
    	`
   
 - No es necesario configurar variables de entorno
